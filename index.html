@@ -128,14 +128,15 @@ body {
         if(myData.title == ""){
             $('#myText').html("No results yet")
         }else{
-            $('#myText').html(myData.title + myData.artist + myData.album)
+            $('#song').html(myData.title)
+            $('#artist').html(myData.artist)
         }
       
 
         $('#clock-c').countdown(getTime(myData.time), function(event) {
-        var $this = $(this).html(event.strftime(''
-            + '<span class="h1 font-weight-bold">%M</span> Min'
-            + '<span class="h1 font-weight-bold">%S</span> Sec'));
+            var $this = $(this).html(event.strftime(''
+                + '<span class="h1 font-weight-bold">%M</span> Min'
+                + '<span class="h1 font-weight-bold">%S</span> Sec'));
         });
 
 
@@ -143,27 +144,29 @@ body {
 
 
     webSocket.onclose = function (event) {
-        document.getElementById("time").innerHTML = "DISCONNECTED FROM SERVER, REFRESH PAGE"
+        $('#song').html("")
+        $('#artist').html("")
+        $('#clock-c').html("DISCONNECTED FROM SERVER, REFRESH PAGE")
     };
 
   </script>
 </head>
 
 <body>
-  <div class="container py-5">
     
     <header class="text-center">
         <h1 class="display-4 mb-4">90FM Live Song Countdown</h1>
     </header>
 
     <div class="rounded bg-gradient-4 text-white shadow p-5 text-center mb-5">
-        <p class="mb-0 font-weight-bold text-uppercase" id="myText"></p>
+        <br>
+        <p class="mb-0 h4 font-weight-bold text-uppercase" id="song"></p>
+        <p class="mb-0 h4 font-weight-bold text-uppercase" id="artist"></p>
         <div id="clock-c" class="countdown py-4"></div>
-
+        <br>
     </div>
 
 
-    </div>
 </body>
 
 </html>
